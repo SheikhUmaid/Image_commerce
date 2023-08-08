@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<header id="header">
+    <a href="{% url 'index' %}" class="logo">Sign IN</a>
+  </header>
+  <nav id="nav">
+    <ul class="links">
+      <li class = "{{index_activity}}"><a href="{% url 'index' %}">This is Massively</a></li>
+  {% if request.user.is_authenticated %}
+      <li><a href="generic.html" >Welcome {{request.user.name}}</a></li>
+  {% endif %}
+  {% if request.user.is_anonymous %}
+      <li class = "{{signin_activity}}"><a href="{% url 'signin' %}">Sign in</a></li>
+      <li class = "{{register_activity}}"><a href="{% url 'register' %}">register</a></li>
+  {% endif %}
+    </ul>
+    <ul class="icons">
+      <li>
+        <a href="#" class="icon brands fa-twitter"
+          ><span class="label">Twitter</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon brands fa-facebook-f"
+          ><span class="label">Facebook</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon brands fa-instagram"
+          ><span class="label">Instagram</span></a
+        >
+      </li>
+      <li>
+        <a href="#" class="icon brands fa-github"
+          ><span class="label">GitHub</span></a
+        >
+      </li>
+    </ul>
+  </nav>
+<div id="main">
+<form method="post" action="#">
+  {% csrf_token %}
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            <input type="email" name="email" id="demo-name"  placeholder="Email Address" />
+        </div>
+        <div class="col-6 col-12-xsmall">
+            <input type="password" name="password"  placeholder="password" />
+        </div>
+       
+        
+        <!-- Break -->
+        <div class="col-6 col-12-small">
+            <input type="checkbox" id="demo-copy" name="demo-copy">
+            <label for="demo-copy">Remember me!</label>
+        </div>
+        
+        
+        <!-- Break -->
+        <div class="col-12">
+            <ul class="actions">
+                <li><input type="submit" value="Login" class="primary" id="myButton" /></li>
+                <li><input type="reset" value="Reset" /></li>
+            </ul>
+        </div>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register!</a></p>
+    </div>
+    
+</form>
+
+
+
+</div>
+{% endblock body %}
